@@ -1,0 +1,8 @@
+{
+  "name": "personal",
+  "version": "1.0.0",
+  "description": "Mi proyecto personal",
+  "scripts": {
+    "start": "npx serve . -l $PORT"
+  }
+}
