@@ -9,15 +9,14 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
 
-// Servir archivos estáticos desde wwwroot y desde la raíz
-app.UseDefaultFiles(); // Esto hace que index.html sea la página por defecto
-app.UseStaticFiles();  // Esto sirve archivos estáticos
+// Servir archivos estáticos (IMPORTANTE: Esto debe ir ANTES del routing)
+app.UseDefaultFiles(); // Sirve index.html como página principal
+app.UseStaticFiles();  // Sirve archivos estáticos (HTML, CSS, imágenes)
 
 app.UseRouting();
 
