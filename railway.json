@@ -1,8 +1,9 @@
+json
 {
-    "build": {
-        "builder": "NIXPACKS"
-    },
-    "deploy": {
-        "startCommand": "dotnet personal.dll"
-    }
+  "build": {
+    "builder": "NIXPACKS"
+  },
+  "deploy": {
+    "startCommand": "dotnet run --urls=http://0.0.0.0:$PORT"
+  }
 }
