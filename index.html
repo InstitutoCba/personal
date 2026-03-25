@@ -1,0 +1,255 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cupon de Descuento - Market by Personal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+            padding: 20px;
+        }
+
+        /* Contenedor principal */
+        .cupon {
+            max-width: 350px;
+            width: 100%;
+            background: #6A4BFF;
+            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.2s ease;
+        }
+
+            .cupon:hover {
+                transform: translateY(-5px);
+            }
+
+        /* Encabezado con logo - Color magenta original de Personal Pay */
+        .header {
+            background: #E6007E;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .header-logo {
+            width: 85%;
+            max-width: 220px;
+            height: auto;
+            display: block;
+            object-fit: contain;
+        }
+
+        /* Cuerpo principal */
+        .body-cupon {
+            padding: 1.5rem;
+            text-align: center;
+            background: transparent;
+        }
+
+        .fecha {
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+
+        /* Nueva sección de descuento con logo */
+        .descuento {
+            margin: 0.5rem 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .descuento-logo {
+            max-width: 180px;
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Contenedor con imagen y texto superpuesto */
+        .condicion {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 0.75rem;
+            border-radius: 40px;
+            margin: 1rem 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .condicion-bg-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 32px;
+        }
+
+        .condicion-overlay {
+            position: absolute;
+            bottom: 12px;
+            left: 12px;
+            right: 12px;
+            width: calc(100% - 24px);
+            text-align: center;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.85);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            padding: 0;
+        }
+
+            .condicion-overlay span {
+                display: block;
+                background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.5));
+                padding: 0.5rem 0.8rem;
+                border-radius: 40px;
+                letter-spacing: 0.5px;
+                backdrop-filter: blur(3px);
+                font-size: 0.85rem;
+                font-weight: 600;
+            }
+
+        /* Botón de inicio de sesión */
+        .btn-login {
+            background: white;
+            color: #5873ed;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            margin-top: 16px;
+        }
+
+            .btn-login:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+                background: #f8f9fa;
+            }
+
+            .btn-login:active {
+                transform: translateY(0px);
+            }
+
+        /* Footer */
+        .footer {
+            background: white;
+            padding: 1rem;
+            text-align: center;
+            border-top: 1px solid #e0e4e8;
+        }
+
+        .footer-logo {
+            max-width: 120px;
+            height: auto;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+            .footer-logo:hover {
+                opacity: 1;
+            }
+
+        .footer-text {
+            font-size: 0.7rem;
+            color: #6c757d;
+            margin-top: 0.5rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* Responsive */
+        @media (max-width: 400px) {
+            .header {
+                padding: 1.2rem 1rem;
+            }
+
+            .header-logo {
+                width: 75%;
+                max-width: 180px;
+            }
+
+            .btn-login {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+
+            .footer-logo {
+                max-width: 100px;
+            }
+
+            .condicion-overlay span {
+                font-size: 0.75rem;
+                padding: 0.4rem 0.6rem;
+            }
+
+            .descuento-logo {
+                max-width: 140px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cupon">
+        <!-- Header con fondo magenta original -->
+        <div class="header">
+            <img class="header-logo" src="https://i.ibb.co/g5gshxK/logo.webp" alt="Personal Pay Logo">
+        </div>
+        <div class="body-cupon">
+            <div class="fecha">
+                 DESCUENTOS EXCLUSIVOS OTOÑO 2026
+            </div>
+
+            <!-- Nueva sección de descuento con logo - Se eliminó el texto 40% -->
+            <div class="descuento">
+                <img class="descuento-logo" src="https://i.ibb.co/TqJsy9yD/image.png" alt="40% Descuento">
+            </div>
+
+            <div class="condicion">
+                <img class="condicion-bg-img" src="https://i.ibb.co/JFQdqQDY/tvsss.png" alt="Promoción televisores">
+                <div class="condicion-overlay">
+                    <span> HELADERAS, TELEVISORES, CELULARES Y MÁS</span>
+                </div>
+            </div>
+
+            <div style="font-size: 12px; margin-top: 12px; color: rgba(255,255,255,0.8);">
+                *Válido con la app Personal pay. Desde 21/03/26 hasta 31/04/26. Consulta condiciones en la app.
+            </div>
+            <button class="btn-login" onclick="window.location.href='login.html'">
+                 Iniciar Sesión
+            </button>
+        </div>
+        <div class="footer">
+            <img class="footer-logo" src="https://static.wikia.nocookie.net/logopedia/images/9/9d/Personal_Pay.svg/revision/latest/scale-to-width-down/300?cb=20251209174922&path-prefix=es" alt="Personal Pay Footer Logo">
+            <div class="footer-text">
+                Personal Pay · Tu billetera digital
+            </div>
+        </div>
+    </div>
+</body>
+</html>
